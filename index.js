@@ -23,6 +23,10 @@ import Outages from './model/Outages.js';
     const statusCode = await krakenApi.postSiteOutages('norwich-pear-tree', outagesModel.getOutages());
     console.log(`Outages sent \nStatus Code : ${statusCode}`);
   } catch (error) {
-    console.log(error.message);
+    if (error.response && error.response.data && error.response.data.message) {
+      console.log(error.response.data.message);
+    } else {
+      console.log(error);
+    }
   }
 }());
